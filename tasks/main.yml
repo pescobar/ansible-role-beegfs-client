@@ -47,7 +47,7 @@
   copy:
     dest: "/etc/beegfs/connInterfacesFile"
     content: |
-      "{{ beegfs_network_interface }}"
+      {{ beegfs_network_interface }}
   notify: "restart beegfs client"
 
 - name: Configure beegfs-client config file to only use the storage network interface
