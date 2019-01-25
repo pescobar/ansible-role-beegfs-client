@@ -1,2 +1,16 @@
 ---
 # defaults file for ansible-role-beegfs-client
+
+beegfs_version: 7.1.2
+
+beegfs_master_server: 192.168.200.251
+
+beegfs_add_repos: True
+
+beegfs_repo_url: "https://www.beegfs.io/release/latest-stable/dists/beegfs_rhel7.repo"
+
+beegfs_repo_key: "https://www.beegfs.io/release/latest-stable/gpg/RPM-GPG-KEY-beegfs"
+
+beegfs_repo_file: "/etc/yum.repos.d/beegfs-rhel7.repo"
+
+beegfs_network_interface: eno2

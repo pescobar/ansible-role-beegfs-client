@@ -1,2 +1,14 @@
 ---
 # handlers file for ansible-role-beegfs-client
+
+- name: restart beegfs-helperd
+  service:
+    name: beegfs-helperd
+    state: restarted
+  listen: "restart beegfs client"
+
+- name: restart beegfs-client
+  service:
+    name: beegfs-client
+    state: restarted
+  listen: "restart beegfs client"

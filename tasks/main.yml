@@ -1,2 +1,72 @@
 ---
 # tasks file for ansible-role-beegfs-client
+
+- name: Add BeeGFS repos is beegfs_add_repos is true
+  block:
+
+  - name: Ensure the BeeGFS package repo is defined
+    get_url:
+      url: "{{ beegfs_repo_url }}"
+      dest: "{{ beegfs_repo_file }}"
+    become: true
+
+  - name: add rpm key for redhat family machines
+    rpm_key:
+      state: present
+      key: "{{ beegfs_repo_key }}"
+    become: true
+
+  when: beegfs_add_repos | bool
+
+- name: Disable selinux
+  selinux:
+    state: disabled
+
+- name: Install BeeGFS client RPMs
+  yum:
+    name:
+      - "beegfs-client-{{ beegfs_version }}-el{{ ansible_distribution_major_version }}"
+      - "beegfs-helperd-{{ beegfs_version }}-el{{ ansible_distribution_major_version }}"
+      - "beegfs-utils-{{ beegfs_version }}-el{{ ansible_distribution_major_version }}"
+    state: present
+
+- name: install kernel-devel RPM
+  yum:
+    name: "kernel-devel-{{ ansible_kernel }}"
+    state: present
+    disable_excludes: main
+
+- name: Configure beegfs-client config file to point to the specified management host
+  lineinfile:
+    dest: "/etc/beegfs/beegfs-client.conf"
+    regexp: "^sysMgmtdHost"
+    line: "sysMgmtdHost = {{ beegfs_master_server }}"
+  notify: "restart beegfs client"
+
+- name: Create file /etc/beegfs/connInterfacesFile
+  copy:
+    dest: "/etc/beegfs/connInterfacesFile"
+    content: |
+      "{{ beegfs_network_interface }}"
+  notify: "restart beegfs client"
+
+- name: Configure beegfs-client config file to only use the storage network interface
+  lineinfile:
+    dest: "/etc/beegfs/beegfs-client.conf"
+    regexp: "^connInterfacesFile"
+    line: "connInterfacesFile = /etc/beegfs/connInterfacesFile"
+  notify: "restart beegfs client"
+
+- name: install gcc (required to build the kernel module)
+  yum:
+    name: gcc
+    state: present
+
+- name: Enable BeeGFS services
+  service:
+    name: "{{item}}"
+    state: started
+    enabled: yes
+  loop:
+    - beegfs-helperd
+    - beegfs-client
