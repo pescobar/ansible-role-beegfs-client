@@ -3,6 +3,8 @@ ansible-role-beegfs-client
 
 Simple role installing the beegfs client in a CentOS machine
 
+NO RDMA SUPPORT BY NOW
+
 Requirements
 ------------
 
