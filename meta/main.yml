@@ -1,6 +1,7 @@
 ---
 galaxy_info:
 
+  role_name: beegfs_client
   author: Pablo Escobar
   description: Simple role installing the beegfs client in a CentOS machine
 
