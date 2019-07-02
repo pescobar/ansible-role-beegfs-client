@@ -8,10 +8,6 @@ Simple role installing the beegfs client in a CentOS machine
 
 NO RDMA SUPPORT BY NOW
 
-Requirements
-------------
-
-None
 
 Role Variables
 --------------
@@ -31,11 +27,6 @@ beegfs_repo_file: "/etc/yum.repos.d/beegfs-rhel7.repo"
 
 beegfs_network_interface: eno2
 ```
-
-Dependencies
-------------
-
-None
 
 Example Playbook
 ----------------
