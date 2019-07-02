@@ -8,5 +8,10 @@ rules:
     max-spaces-inside: 1
     level: error
   line-length: disable
-  #truthy: disable
+  truthy: disable
   comments-indentation: disable
+
+ignore: |
+  roles
+  virtenv
+  venv
