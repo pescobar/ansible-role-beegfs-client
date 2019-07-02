@@ -1,4 +1,4 @@
-[![Build Status](https://travis-ci.org/pescobar/ansible-role-beegfs.svg?branch=master)](https://travis-ci.org/pescobar/ansible-role-beegfs)
+[![Build Status](https://travis-ci.org/pescobar/ansible-role-beegfs-client.svg?branch=master)](https://travis-ci.org/pescobar/ansible-role-beegfs-client)
 [![Ansible Galaxy](https://img.shields.io/badge/galaxy-pescobar.beegfs_client-blue.svg)](https://galaxy.ansible.com/pescobar/beegfs_client)
 
 ansible-role-beegfs-client
