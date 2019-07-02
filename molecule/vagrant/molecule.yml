@@ -2,18 +2,16 @@
 dependency:
   name: galaxy
 driver:
-  name: docker
+  name: vagrant
+  provider:
+    name: virtualbox
 lint:
   name: yamllint
 platforms:
-  - name: centos7-systemd-docker
-    image: centos/systemd
-    # image: retr0h/centos7-systemd-ansible:latest
-    # image: centos:7
-    privileged: true
-    command: /usr/sbin/init
-    # volumes:
-    #   - /sys/fs/cgroup:/sys/fs/cgroup:ro
+  - name: bento-centos-7-vagrant
+    box: bento/centos-7
+    cpus: 1
+    memory: 1024
 provisioner:
   name: ansible
   options:
@@ -23,7 +21,7 @@ provisioner:
     options:
       R: true
 scenario:
-  name: docker
+  name: vagrant
 verifier:
   name: testinfra
   directory: ../tests

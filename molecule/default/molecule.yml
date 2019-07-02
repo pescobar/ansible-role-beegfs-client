@@ -2,20 +2,16 @@
 dependency:
   name: galaxy
 driver:
-  name: vagrant
-  provider:
-    name: virtualbox
+  name: docker
 lint:
   name: yamllint
 platforms:
-  - name: centos7.5-vagrant
-    box: centos/7
-    # centos7.5 image
-    # https://app.vagrantup.com/centos/boxes/7
-    # https://blog.centos.org/2018/10/updated-centos-vagrant-images-available-v1809-01/
-    box_version: "1809.01"
-    cpus: 2
-    memory: 2048
+  - name: centos7-docker
+    image: mplachter/docker-centos7-molecule
+    command: /usr/sbin/init
+    volumes:
+      - /sys/fs/cgroup:/sys/fs/cgroup:ro
+    privileged: true
 provisioner:
   name: ansible
   options:
