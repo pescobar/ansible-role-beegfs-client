@@ -41,6 +41,7 @@
     dest: "/etc/beegfs/beegfs-client.conf"
     regexp: "^sysMgmtdHost"
     line: "sysMgmtdHost = {{ beegfs_master_server }}"
+    backrefs: true
   notify: "restart beegfs client"
 
 - name: Create file /etc/beegfs/connInterfacesFile
@@ -55,6 +56,7 @@
     dest: "/etc/beegfs/beegfs-client.conf"
     regexp: "^connInterfacesFile"
     line: "connInterfacesFile = /etc/beegfs/connInterfacesFile"
+    backrefs: true
   notify: "restart beegfs client"
 
 - name: install gcc (required to build the kernel module)
